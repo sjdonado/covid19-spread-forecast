@@ -17,12 +17,22 @@ The functions required by the project are here.
 In order to run the project you just have to run the MATLAB script placed in the root of the dir `/main.m`.
 
 ## Contributors
--  [Brian Ramirez](https://github.com/brianr482)
--  [Juan Rodriguez](https://github.com/sjdonado)
--  [Oskhar Arrieta](https://github.com/oskhar1099)
--  [Juan Estrada](https://github.com/Juanse11)
--  Sharon Figueroa
-- Cristian Yepes
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/brianr482"><img src="https://avatars.githubusercontent.com/u/26311880?v=3" width="100px;" alt=""/><br /><sub><b>Brian Ramirez</b></sub></a>
+    </td>
+    <td align="center"><a href="https://github.com/sjdonado"><img src="https://avatars.githubusercontent.com/u/27580836?v=3" width="100px;" alt=""/><br /><sub><b>Juan Rodríguez</b></sub></a>
+    </td>
+    <td align="center"><a href="https://github.com/oskhar1099"><img src="https://avatars.githubusercontent.com/u/44534546?v=3" width="100px;" alt=""/><br /><sub><b>Oskhar Arrieta</b></sub></a>
+    </td>
+    <td align="center"><a href="https://github.com/Juanse11"><img src="https://avatars.githubusercontent.com/u/26317261?v=3" width="100px;" alt=""/><br /><sub><b>Juan Estrada</b></sub></a>
+    </td>
+    <td align="center"><a href="#"><img src="" width="100px;" alt=""/><br /><sub><b>Sharon Figueroa</b></sub></a>
+    </td>
+    <td align="center"><a href="#"><img src="" width="100px;" alt=""/><br /><sub><b>Cristian Yepes</b></sub></a>
+    </td>
+  </tr>
+  </table>
 
 ## Special thanks
 - PhD [Elias Niño](https://sites.google.com/a/vt.edu/eliasnino/)
