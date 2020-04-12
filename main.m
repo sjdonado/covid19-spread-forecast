@@ -8,27 +8,19 @@ addpath './functions';
 
 % Extract and re-label data
 T = readtable('data/reported_cases.csv');
-T.Properties.VariableNames = {'id_case', 'diagnosis_date','city', ...
-    'department', 'current_status', 'age', 'sex', 'type', ...
-    'country_of_origin'};
+[Confirmed, Deaths, Recovered, Time] = get_data_COVID(T);
 
-T.diagnosis_date.Format = 'dd/MM/uu';
+figure;
+hold on;
+semilogy(Time, Confirmed, 'r', Time, Recovered, 'b', Time, Deaths, 'k');
 
-% Lowercase the current_status column. Some labels have capital letter
-T.current_status = lower(T.current_status);
+ylabel('Number of cases');
+xlabel('Time (days)')
+leg = {'Active (reported)', 'Recovered (reported)', 'Deceased (reported)'};
 
-% Represent the current_state attribute with a nominal value
-% Recovered = -1, Infected = 0, Dead: 1
-T.current_status(strcmp(T.current_status, 'recuperado')) = {-1};
-T.current_status(strcmp(T.current_status, 'recuperado (hospital)')) = {-1};
+legend(leg{:}, 'location', 'best')
 
-T.current_status(strcmp(T.current_status, 'casa')) = {0};
-T.current_status(strcmp(T.current_status, 'hospital')) = {0};
-T.current_status(strcmp(T.current_status, 'hospital uci')) = {0};
-
-T.current_status(strcmp(T.current_status, 'fallecido')) = {1};
-
-T.current_status = cell2mat(T.current_status);
-% X = dir_until(T, '05/03/2020');
-
-% disp(X);
+set(gcf, 'color', 'w')
+grid on
+axis tight
+set(gca, 'yscale', 'lin')
