@@ -1,6 +1,3 @@
-% Eliminate warnings about 
-warning('on');
-
 % Cleaning
 clc;
 clear all;
@@ -14,7 +11,8 @@ T = readtable('data/reported_cases.csv');
 T.Properties.VariableNames = {'id_case', 'diagnosis_date','city', ...
     'department', 'current_status', 'age', 'sex', 'type', ...
     'country_of_origin'};
-T.diagnosis_date.Format = 'dd/MM/uuuu';
+
+T.diagnosis_date.Format = 'dd/MM/uu';
 
 % Lowercase the current_status column. Some labels have capital letter
 T.current_status = lower(T.current_status);
@@ -31,5 +29,6 @@ T.current_status(strcmp(T.current_status, 'hospital uci')) = {0};
 T.current_status(strcmp(T.current_status, 'fallecido')) = {1};
 
 T.current_status = cell2mat(T.current_status);
-X = dir_until(T, '05/03/2020');
-disp(X);
+% X = dir_until(T, '05/03/2020');
+
+% disp(X);
