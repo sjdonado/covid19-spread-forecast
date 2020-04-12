@@ -8,7 +8,7 @@ You can find here all the documentation related with the project. It includes:
 
 ### Data
 You can find here all the relevant data for the model training. It includes:
-- **reported_cases.csv**: This is the offical dataset of the coronavirus cases in Colombia
+- **reported_cases.csv**: This is the offical dataset of the coronavirus cases in Colombia (required date format: dd/MM/uuuu)
 
 ### Functions
 The functions required by the project are here.

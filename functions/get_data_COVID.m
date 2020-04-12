@@ -9,7 +9,7 @@ T.Properties.VariableNames = {'id_case', 'diagnosis_date','city', ...
     'department', 'current_status', 'age', 'sex', 'type', ...
     'country_of_origin'};
 
-T.diagnosis_date.Format = 'dd/MM/uu';
+T.diagnosis_date.Format = 'dd/MM/uuuu';
 
 % Lowercase the current_status column. Some labels have capital letter
 T.current_status = lower(T.current_status);
