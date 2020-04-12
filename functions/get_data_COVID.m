@@ -25,7 +25,8 @@ T.current_status(strcmp(T.current_status, 'hospital uci')) = {'confirmed'};
 
 T.current_status(strcmp(T.current_status, 'fallecido')) = {'dead'};
 
-T = convertvars(T, {'city', 'department', 'current_status', 'sex', 'type', 'country_of_origin'}, 'categorical');
+T = convertvars(T, {'city', 'department', 'current_status', 'sex', 'type', ...
+    'country_of_origin'}, 'categorical');
 
 Confirmed = [];
 Deaths = [];
