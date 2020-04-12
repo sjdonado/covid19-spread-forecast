@@ -27,9 +27,9 @@ In order to run the project you just have to run the MATLAB script placed in the
     </td>
     <td align="center"><a href="https://github.com/Juanse11"><img src="https://avatars.githubusercontent.com/u/26317261?v=3" width="100px;" alt=""/><br /><sub><b>Juan Estrada</b></sub></a>
     </td>
-    <td align="center"><a href="#"><img src="" width="100px;" alt=""/><br /><sub><b>Sharon Figueroa</b></sub></a>
+    <td align="center"><a href="https://github.com/sharonfm"><img src="https://avatars0.githubusercontent.com/u/22806904?v=3" width="100px;" alt=""/><br /><sub><b>Sharon Figueroa</b></sub></a>
     </td>
-    <td align="center"><a href="#"><img src="" width="100px;" alt=""/><br /><sub><b>Cristian Yepes</b></sub></a>
+    <td align="center"><a href="https://github.com/Ycristian01"><img src="https://avatars2.githubusercontent.com/u/25647410?v=3" width="100px;" alt=""/><br /><sub><b>Cristian Yepes</b></sub></a>
     </td>
   </tr>
   </table>
