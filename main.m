@@ -29,4 +29,7 @@ T.current_status(strcmp(T.current_status, 'hospital')) = {0};
 T.current_status(strcmp(T.current_status, 'hospital uci')) = {0};
 
 T.current_status(strcmp(T.current_status, 'fallecido')) = {1};
+
 T.current_status = cell2mat(T.current_status);
+X = dir_until(T, '05/03/2020');
+disp(X);
