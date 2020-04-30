@@ -1,4 +1,4 @@
 To download Colombia dataset
-https://e.infogram.com/01266038-4580-4cf0-baab-a532bd968d0c?parent_url=https%3A%2F%2Fwww.ins.gov.co%2FNoticias%2FPaginas%2FCoronavirus.aspx&src=embed#
+https://www.datos.gov.co/Salud-y-Protecci-n-Social/Casos-positivos-de-COVID-19-en-Colombia/gt2j-8ykr/data
 Generalized SEIR Epidemic Model for MATLAB
 https://github.com/ECheynet/SEIR

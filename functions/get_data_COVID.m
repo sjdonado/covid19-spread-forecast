@@ -5,28 +5,30 @@ function [Confirmed, Deaths, Recovered, Time] = get_data_COVID(T)
 %
 % Author: sjdonado
 %
-T.Properties.VariableNames = {'id_case', 'diagnosis_date','city', ...
-    'department', 'current_status', 'age', 'sex', 'type', ...
-    'country_of_origin'};
-
-T.diagnosis_date.Format = 'dd/MM/uuuu';
+T.Properties.VariableNames = {'id_case', 'notification_date', 'code', ...
+    'city', 'department', 'current_status', 'age', 'sex', 'type', ...
+    'status', 'country_origin', 'fis', 'death_date', 'diagnosis_date', ...
+    'recover_date', 'web_report_date'};
 
 % Lowercase the current_status column. Some labels have capital letter
 T.current_status = lower(T.current_status);
 
-% Represent the current_state attribute with a nominal value
-% Recovered = -1, Confirmed = 0, Dead: 1
 T.current_status(strcmp(T.current_status, 'recuperado')) = {'recovered'};
 T.current_status(strcmp(T.current_status, 'recuperado (hospital)')) = {'recovered'};
+T.current_status(strcmp(T.current_status, 'Recuperado')) = {'recovered'};
 
 T.current_status(strcmp(T.current_status, 'casa')) = {'confirmed'};
+T.current_status(strcmp(T.current_status, 'Casa')) = {'confirmed'};
+
 T.current_status(strcmp(T.current_status, 'hospital')) = {'confirmed'};
 T.current_status(strcmp(T.current_status, 'hospital uci')) = {'confirmed'};
+T.current_status(strcmp(T.current_status, 'Hospital')) = {'confirmed'};
+T.current_status(strcmp(T.current_status, 'Hospital uci')) = {'confirmed'};
 
 T.current_status(strcmp(T.current_status, 'fallecido')) = {'dead'};
+T.current_status(strcmp(T.current_status, 'Fallecido')) = {'dead'};
 
-T = convertvars(T, {'city', 'department', 'current_status', 'sex', 'type', ...
-    'country_of_origin'}, 'categorical');
+T = convertvars(T, {'current_status'}, 'categorical');
 
 Confirmed = [];
 Deaths = [];
@@ -36,16 +38,19 @@ Time = datetime(zeros(1,1), 0, 0);
 last_date = datetime(0, 0, 0);
 for i = 1:size(T, 1)
     row = T(i, :);
-    if row.diagnosis_date ~= last_date
+    date = split(row.diagnosis_date, 'T');
+    date = split(string(date(1,1)), '-');
+    diagnosis_date = datetime(str2num(date(1)),str2num(date(2)),str2num(date(3)));
+    if diagnosis_date ~= last_date
         Recovered(end + 1) = 0;
         Confirmed(end + 1) = 0;
         Deaths(end + 1) = 0;
         if last_date == datetime(0, 0, 0)
-            Time(end) = row.diagnosis_date;
+            Time(end) = diagnosis_date;
         else
-            Time(end + 1) = row.diagnosis_date;
+            Time(end + 1) = diagnosis_date;
         end
-        last_date = row.diagnosis_date;
+        last_date = diagnosis_date;
     end
 
     if row.current_status == "recovered"
