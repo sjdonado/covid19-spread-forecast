@@ -10,13 +10,13 @@ addpath './functions';
 table = readtable('data/Casos_positivos_de_COVID-19_en_Colombia.csv');
 [Confirmed, Deaths, Recovered, Time] = get_data_COVID(table);
 
-sum(Confirmed)+sum(Deaths)+sum(Recovered) % Expected value: 6211
+sum(Confirmed) + sum(Deaths) + sum(Recovered) % Expected value: 6211
 
 %beta = 1;
 % beta = 0.214;
 
 % Infection rate
-beta = 0.02;
+beta = 1.2;
 
 %gamma = 1/5;
 % gamma = 1 / 28;
@@ -24,13 +24,14 @@ beta = 0.02;
 % Recovered rate
 gamma = 0.065;
 
-display(Time)
-tmax = size(Time, 2);
-display(size(Time, 2) / 7)
+tmax = days(max(Time) - min(Time));
 
-S0 = 49.65e6; % Colombia population
 
-[t,x] = SIR(S0,Confirmed(1,1),Recovered(1,1),beta,gamma,tmax);
+
+initial_total_victims = Confirmed(1,1) + Recovered(1,1) + Deaths(1,1);
+S0 = 49.65e6 - 1; % Colombia population minus total victims
+
+[t,x] = SIR(S0,1,0,beta,gamma,tmax);
 
 figure;
 hold all;
