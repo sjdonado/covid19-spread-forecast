@@ -22,11 +22,9 @@ beta = 1.2;
 % gamma = 1 / 28;
 
 % Recovered rate
-gamma = 0.065;
+gamma = 0.116;
 
 tmax = days(max(Time) - min(Time));
-
-
 
 initial_total_victims = Confirmed(1,1) + Recovered(1,1) + Deaths(1,1);
 S0 = 49.65e6 - 1; % Colombia population minus total victims
@@ -42,4 +40,4 @@ plot(t,x(:,3),'G-o')% Recovered cases
 legend('Susceptible', 'Infectious', 'Recovered', 'location', 'best');
 
 ylabel('Number of people');
-xlabel('Time');
+xlabel('Time (days)');

@@ -20,5 +20,5 @@ function dx = dx(~,x)
     dx(3) = gamma*x(2);
     dx = [dx(1),dx(2),dx(3)]';
 end
-[T,X] = ode15s(@dx ,[0,tmax],[S0,I0,R0]);
+[T,X] = ode15s(@dx,[0,tmax],[S0,I0,R0]);
 end
