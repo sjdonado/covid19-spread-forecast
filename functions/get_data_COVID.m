@@ -3,7 +3,7 @@ function [Confirmed, Deaths, Recovered, Time] = get_data_COVID(T)
 % Collect the updated data from the COVID-19 epidemy in Colombia from the
 % reported_cases.csv
 %
-% Author: sjdonado
+% Authors: sjdonado & brianr482
 %
 T.Properties.VariableNames = {'id_case', 'notification_date', 'code', ...
     'city', 'department', 'current_status', 'age', 'sex', 'type', ...

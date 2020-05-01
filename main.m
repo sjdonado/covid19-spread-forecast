@@ -13,10 +13,20 @@ table = readtable('data/Casos_positivos_de_COVID-19_en_Colombia.csv');
 sum(Confirmed)+sum(Deaths)+sum(Recovered) % Expected value: 6211
 
 %beta = 1;
-beta = 0.214;
+% beta = 0.214;
+
+% Infection rate
+beta = 0.02;
+
 %gamma = 1/5;
-gamma = 1 / 28;
-tmax = size(Time, 2) / 7;
+% gamma = 1 / 28;
+
+% Recovered rate
+gamma = 0.065;
+
+display(Time)
+tmax = size(Time, 2);
+display(size(Time, 2) / 7)
 
 S0 = 49.65e6; % Colombia population
 
