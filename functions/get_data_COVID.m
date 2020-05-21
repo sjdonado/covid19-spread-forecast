@@ -30,37 +30,31 @@ T.current_status(strcmp(T.current_status, 'Fallecido')) = {'dead'};
 
 T = convertvars(T, {'current_status'}, 'categorical');
 
-Confirmed = [];
-Deaths = [];
-Recovered = [];
-Time = datetime(zeros(1,1), 0, 0);
+% Split data into arrays which represent all the possible statuses
+DATE_FORMAT = 'yyyy-MM-dd''T''HH:mm:ss.SSS';
+diagnosis_dates = datetime(T.diagnosis_date, 'InputFormat', DATE_FORMAT);
+death_dates = datetime(T.death_date, 'InputFormat', DATE_FORMAT);
+recover_dates = datetime(T.recover_date, 'InputFormat', DATE_FORMAT);
 
-last_date = datetime(0, 0, 0);
-for i = 1:size(T, 1)
-    row = T(i, :);
-    date = split(row.diagnosis_date, 'T');
-    date = split(string(date(1,1)), '-');
-    diagnosis_date = datetime(str2num(date(1)),str2num(date(2)),str2num(date(3)));
-    if diagnosis_date ~= last_date
-        Recovered(end + 1) = 0;
-        Confirmed(end + 1) = 0;
-        Deaths(end + 1) = 0;
-        if last_date == datetime(0, 0, 0)
-            Time(end) = diagnosis_date;
-        else
-            Time(end + 1) = diagnosis_date;
-        end
-        last_date = diagnosis_date;
-    end
+% Get minimum and maximun date in order to build the time range
+first_date = datetime(T(1, :).diagnosis_date, 'InputFormat', DATE_FORMAT);
+last_date = max([diagnosis_dates ; death_dates ; recover_dates]);
 
-    if row.current_status == "recovered"
-        Recovered(end) = Recovered(end) + 1;
-    end
-    if row.current_status == "confirmed"
-        Confirmed(end) = Confirmed(end) + 1;
-    end
-    if row.current_status == "dead"
-        Deaths(end) = Deaths(end) + 1;
-    end
-end
+% Preallocating - This is to optimize the filling up process of the 
+% arrays returned by the function
+total_days = days(last_date - first_date);
+Recovered = zeros(total_days, 1);
+Confirmed = zeros(total_days, 1);
+Deaths = zeros(total_days, 1);
+
+% Create the time range
+Time = first_date:last_date;
+
+% Loop through the  defined time range
+i = 1;
+for date = Time
+    Recovered(i) = sum(date == recover_dates);
+    Confirmed(i) = sum(date == diagnosis_dates);
+    Deaths(i) = sum(date == death_dates);
+    i = i + 1;
 end
