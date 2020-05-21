@@ -1,24 +1,34 @@
-function [T,X] = SIR(S0,I0,R0,beta,gamma,tmax)
+function S = SIR(X,t)
 % SIR model.
 %
 % Input
-%   S0: scalar [1x1]: Initial number of susceptible cases
-%   I0: scalar [1x1]: Initial number of infectious cases
-%   R0: scalar [1x1]: Initial number of recovered cases
-%   beta: scalar [1x1]: Infection rate
-%   gamma: scalar [1x1]: Cure rate
-%   tmax: scalar [1x1]: Forecast limit (by weeks)
+%   X(1): beta: scalar [1x1]: Infection rate
+%   X(2): gamma: scalar [1x1]: Recover rate
+%   X(3): scalar [1x1]: Initial number of susceptible cases
+%   X(4): scalar [1x1]: Initial number of infectious cases
+%   X(5): scalar [1x1]: Initial number of recovered cases
+%   t: scalar [1x1]: Time days
 %
 % Output
 %   T: vector [1xN] time indexes
 %   X: vector [3xN] of the target time-histories of the
 %      [susceptible, infectious, recovered] cases
 
-function dx = dx(~,x)
-    dx(1) = -beta*x(1)*x(2);
-    dx(2) = beta*x(1)*x(2) - gamma*x(2);
-    dx(3) = gamma*x(2);
-    dx = [dx(1),dx(2),dx(3)]';
+
+x0 = X(3:5);
+
+% function dx = dx(~, x)
+%     dx(1) = -X(1) * x(1) * x(2);
+%     dx(2) =  X(1) * x(1) * x(2) - X(2) * x(2);
+%     dx(3) =  X(2) * x(2);
+%     dx = [dx(1),dx(2),dx(3)]';
+% end
+function dx = dx(~, x)
+    dx = zeros(3,1);
+    dx(1) = -X(1) .* x(1) .* x(2);
+    dx(2) =  X(1) .* x(1) .* x(2) - X(2) .* x(2);
+    dx(3) =  X(2) .* x(2);
 end
-[T,X] = ode15s(@dx,[0,tmax],[S0,I0,R0]);
+
+[~, S] = ode15s(@dx, t, x0);
 end
