@@ -10,19 +10,13 @@ addpath './functions';
 table = readtable('data/Casos_positivos_de_COVID-19_en_Colombia.csv');
 [Confirmed, Deaths, Recovered, Time] = get_data_COVID(table);
 
-sum(Confirmed) + sum(Deaths) + sum(Recovered) % Expected value: 6211
-
-%beta = 1;
-% beta = 0.214;
+sum(Confirmed) % Expected value: 6211
 
 % Infection rate
 beta = 1.2;
 
-%gamma = 1/5;
-% gamma = 1 / 28;
-
 % Recovered rate
-gamma = 0.116;
+gamma = sum(Recovered) / sum(Confirmed);
 
 tmax = days(max(Time) - min(Time));
 
