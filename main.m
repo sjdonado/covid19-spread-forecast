@@ -26,6 +26,7 @@ tmax = days(max(Time) - min(Time));
 
 initial_total_victims = Confirmed(1,1) + Recovered(1,1) + Deaths(1,1);
 S0 = 49.65e6; % Colombia population
+%S0 = 9e5;
 
 t = (1:tmax);
 % Subtract to S0 the first infected
@@ -37,15 +38,28 @@ I = cumsum(Confirmed);
 R = cumsum(Deaths + Recovered);
 S = ones(size(t, 1), 1) * S0 - (I + R);
 data = [S(:) I(:) R(:)];
+t_data = 1:size(data, 1);
+
+figure;
+hold all;
+grid on;
+title('Colombia COVID-19 dataset');
+plot(t_data, I, 'B-', 'linewidth', 2)% Infectious cases
+plot(t_data, R, 'R-', 'linewidth', 2)% Recovered cases
+
+legend('Infectious', 'Recovered + Deaths', 'location', 'best');
+
+ylabel('Number of people');
+xlabel('Time (days)');
 
 % Initialize beta and gamma randomly
-init = [rand(2,1)*1E-2;  data(1,:)'];
+init = [rand(2,1)*1e-2;  data(1,:)'];
 
 % Ask about why opt_params(4) is negative
 % Ask about what means optimize the initial condition
-% Ask about this function, is it the best approach? (due internally uses
+% Ask about this function, is it a good approach? (due internally uses
 % least-squares)
-[opt_params, ResNorm] = lsqcurvefit(@SIR, init, t(:), data(2:end, :));
+[opt_params, ResNorm] = lsqcurvefit(@SIR, init', t(:), data(2:end, :));
 
 % Tem fix: to future sent only opt_params
 xo = SIR([opt_params(1), opt_params(2), S0 - 1, 1, 0], t);
@@ -63,12 +77,11 @@ xlabel('Time (days)');
 
 figure;
 hold all;
-title('Optimized params');
-plot(t, xo(:,1),'B-o')% Susceptible cases
-plot(t, xo(:,2),'R-o')% Infectious cases
-plot(t, xo(:,3),'G-o')% Recovered cases
+title('Fit model');
+plot(t, xo(:,2),'B-o')% Infectious cases
+plot(t, xo(:,3),'R-o')% Recovered cases
 
-legend('Susceptible', 'Infectious', 'Recovered', 'location', 'best');
+legend('Infectious', 'Recovered + Deaths', 'location', 'best');
 
 ylabel('Number of people');
 xlabel('Time (days)');

@@ -7,16 +7,15 @@ function S = SIR(X,t)
 %   X(3): scalar [1x1]: Initial number of susceptible cases
 %   X(4): scalar [1x1]: Initial number of infectious cases
 %   X(5): scalar [1x1]: Initial number of recovered cases
-%   t: scalar [1x1]: Time days
+%   X(5): scalar [1x1]: Initial number of recovered cases
+%   t: scalar [1x1]: Days numbers
 %
 % Output
-%   T: vector [1xN] time indexes
 %   X: vector [3xN] of the target time-histories of the
 %      [susceptible, infectious, recovered] cases
 
 
 x0 = X(3:5);
-
 % function dx = dx(~, x)
 %     dx(1) = -X(1) * x(1) * x(2);
 %     dx(2) =  X(1) * x(1) * x(2) - X(2) * x(2);
