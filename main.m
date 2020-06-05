@@ -22,12 +22,12 @@ beta = 1.2;
 % Recovered rate
 gamma = sum(Recovered) / sum(Confirmed);
 
-tmax = days(max(Time) - min(Time));
+total_days = days(max(Time) - min(Time));
 
 initial_total_victims = Confirmed(1,1) + Recovered(1,1) + Deaths(1,1);
 S0 = 49.65e6; % Colombia population
 
-t = (1:tmax);
+t = (1:total_days);
 % Subtract to S0 the first infected
 x = SIR([beta, gamma, S0 - 1, 1, 0], t);
 
