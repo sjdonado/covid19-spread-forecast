@@ -20,7 +20,7 @@ sum(Confirmed) % Expected value: 6211
 beta = 1.5;
 
 % Recovered rate
-gamma = 2.2
+gamma = 0.022
 
 total_days = days(max(Time) - min(Time))
 
