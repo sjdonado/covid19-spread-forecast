@@ -17,20 +17,21 @@ table = readtable('data/Casos_positivos_de_COVID-19_en_Colombia.csv');
 sum(Confirmed) % Expected value: 6211
 
 % Infection rate
-beta = 1.2;
+beta = 1.5;
 
 % Recovered rate
-gamma = sum(Recovered) / sum(Confirmed);
+gamma = 2.2
 
-total_days = days(max(Time) - min(Time));
+total_days = days(max(Time) - min(Time))
 
-initial_total_victims = Confirmed(1,1) + Recovered(1,1) + Deaths(1,1);
-S0 = 49.65e6; % Colombia population
+initial_total_victims = Confirmed(1,1) + Recovered(1,1) + Deaths(1,1)
+% S0 = 49.65e4; % Colombia population according to DANE
+S0 = 48258494 % Colombia population according to DANE
 %S0 = 9e5;
-
 t = (1:total_days);
-% Subtract to S0 the first infected
-x = SIR([beta, gamma, S0 - 1, 1, 0], t);
+% Subtract to S0 the first 48258494infected
+x = SIR([beta, gamma, S0 - initial_total_victims, Confirmed(1,1), ...
+    Recovered(1,1)], t);
 
 % Optimize beta and gamma estimation fitting the given confirmed cases
 % Init sir params
@@ -62,7 +63,8 @@ init = [rand(2,1)*1e-2;  data(1,:)'];
 [opt_params, ResNorm] = lsqcurvefit(@SIR, init', t(:), data(2:end, :));
 
 % Tem fix: to future sent only opt_params
-xo = SIR([opt_params(1), opt_params(2), S0 - 1, 1, 0], t);
+xo = SIR([opt_params(1), opt_params(2), S0 - initial_total_victims, ...
+    Confirmed(1,1), Recovered(1,1)], t);
 
 figure;
 hold all;
