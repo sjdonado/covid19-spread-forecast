@@ -17,10 +17,10 @@ table = readtable('data/Casos_positivos_de_COVID-19_en_Colombia.csv');
 sum(Confirmed) % Expected value: 6211
 
 % Infection rate
-beta = 1.5;
+beta = 0.033;
 
 % Recovered rate
-gamma = 0.022
+gamma = 0.022;
 
 total_days = days(max(Time) - min(Time))
 
